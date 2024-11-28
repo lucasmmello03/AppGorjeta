@@ -103,7 +103,7 @@
         android:layout_marginEnd="4dp"
         android:text="Limpar"
         app:layout_constraintEnd_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintStart_toStartOf="@+id/tilNumPeople"
+        app:layout_constraintStart_toStartOf="@id/spinner_number_of_people"
         app:layout_constraintTop_toBottomOf="@+id/rgPercentage" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -120,20 +120,11 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="16dp"
         android:text="Calcular"
-        app:layout_constraintEnd_toEndOf="@+id/tilNumPeople"
+        app:layout_constraintEnd_toEndOf="@id/spinner_number_of_people"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
         app:layout_constraintTop_toBottomOf="@+id/rgPercentage" />
 
-    <TextView
-        android:id="@+id/tvResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text = "57.5"
-        android:textSize="24sp"
-        android:layout_margin="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClean"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.lucasmello.appgorjeta
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
@@ -54,28 +55,29 @@ class MainActivity : AppCompatActivity() {
         binding.spinnerNumberOfPeople.adapter = adapter
 
         var numberOfPeopleSelected = 0
-        binding.spinnerNumberOfPeople.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                numberOfPeopleSelected = position
-            }
+        binding.spinnerNumberOfPeople.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    numberOfPeopleSelected = position
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
 
-        }
+            }
 
         //Cálculo Gorjeta
         binding.btnDone.setOnClickListener {
             val totalTableTemp = binding.tieTotal.text
 
 
-            if (totalTableTemp?.isEmpty() == true ) {
+            if (totalTableTemp?.isEmpty() == true) {
 
                 Snackbar.make(binding.tieTotal, "Fill in all the fields", Snackbar.LENGTH_SHORT)
                     .show()
@@ -87,16 +89,29 @@ class MainActivity : AppCompatActivity() {
                 val totalTemp = totalTable / nPeople
                 val tips = totalTemp * percentage / 100
                 val totalWithtips = totalTemp + tips
-                binding.tvResult.text = "Total With Tips: $${"%.2f".format(totalWithtips)}"
+
+
+                val intent = Intent(this, SummaryActivity::class.java)
+                intent.apply {
+                    putExtra("totalTable", totalTable)
+                    putExtra("numPeople", numberOfPeopleSelected)
+                    putExtra("percentage", percentage)
+                    putExtra("totalAmount", totalWithtips)
+                }
+                clean()
+                startActivity(intent)
             }
 
-            binding.btnClean.setOnClickListener{
-                binding.tvResult.text = ""
-                binding.tieTotal.setText("")
-                binding.rbOptionOne.isChecked = false
-                binding.rbOptionTwo.isChecked = false
-                binding.rbOptionThree.isChecked = false
+            binding.btnClean.setOnClickListener {
+                clean()
             }
         }
+    }
+
+    private fun clean() {
+        binding.tieTotal.setText("")
+        binding.rbOptionOne.isChecked = false
+        binding.rbOptionTwo.isChecked = false
+        binding.rbOptionThree.isChecked = false
     }
 }
