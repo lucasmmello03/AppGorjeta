@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
                 percentageTemp?.isEmpty() == true
             ) {
 
-                Snackbar.make(binding.tieTotal, "Fill in all the fields", Snackbar.LENGTH_SHORT)
+                Snackbar.make(binding.tieTotal, "Preencha todos os campos", Snackbar.LENGTH_SHORT)
                     .show()
 
             } else {
